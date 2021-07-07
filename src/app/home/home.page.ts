@@ -11,6 +11,8 @@ export class HomePage implements OnInit {
 
   mensajes: OSNotificationPayload[] = [];
 
+  userId = '';
+
   constructor( public pushService: PushService,
                private applicationRef: ApplicationRef  ) {}
 
@@ -23,7 +25,10 @@ export class HomePage implements OnInit {
 
   async ionViewWillEnter() {
 
-    console.log( 'vill enter - cargar mensajes' )
+    console.log( 'Will enter - cargar mensajes' )
+
+    this.userId = await this.pushService.getUserIdOneSignal();
+    
     this.mensajes = await this.pushService.getMensajes();
 
   }
